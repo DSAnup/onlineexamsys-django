@@ -55,7 +55,8 @@
   <div class="container">
     <div class="col-md-10">
 
-      <h3>Please choice your answer</h3>
+      <h3>You passed {{ curans }}  out of {{ qcount}} questions</h3>
+      <h4>Check currect answer in bellow -</h4>
       
       {% for q in ques %}
         <!-- {{q.question_cat}} -->
@@ -67,11 +68,13 @@
           {% if a.question_cat_id == q.question_cat %}
           <div class="form-check">
             
-            <input class="form-check-input" {% if a.currect_ans %} checked {% endif %} type="checkbox"  id="exampleRadios2">
+            {% if a.currect_ans == '1' %}
+            <input class="form-check-input" disabled checked type="checkbox"  id="exampleRadios2">
+            {% else %}
+            <input class="form-check-input" disabled  type="checkbox"  id="exampleRadios2">
+            {% endif %}
             <label class="form-check-label" for="exampleRadios2">
               {{a.answer_choice}}
-            
-            {{a.currect_ans}}
             </label>
           </div>
 
