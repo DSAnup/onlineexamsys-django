@@ -59,12 +59,10 @@
       <h4>Check currect answer in bellow -</h4>
       
       {% for q in ques %}
-        <!-- {{q.question_cat}} -->
         <div class="form-group">
           <label for="exampleInputEmail1">{{q.question_name}}</label>
           
           {% for a in ans %}
-          <!-- {{a.question_cat_id }} -->
           {% if a.question_cat_id == q.question_cat %}
           <div class="form-check">
             

@@ -20,16 +20,21 @@ def sendans(request):
     ansval = request.POST.getlist('ansval[]')
     ans2 = Answers.objects.filter(currect_ans = 1)
     checkcurans = 0
+    y = []
     for i in ansval:
         x = i.split("_")
-        for a in ans2:
-            if int(x[0]) == a.id and x[1] == str(a.question_cat_id):
-                checkcurans += 1
-    # print(checkcurans)
-    now = datetime.datetime.now()
+        y.append(x[1])
+
+    from collections import Counter
+    z = Counter(y)
+    d = 0
+    for u in z.most_common():
+        anc = Answers.objects.filter(question_cat_id= u[0], currect_ans=1).count()
+        if int(u[1]) == anc:
+            d += 1
     ques = Questions.objects.all()
     ans = Answers.objects.all()
     qcount = Questions.objects.all().count()
     return render(request, 'answercheck.html', {'ques': ques, 'ans': ans,
-        'qcount': qcount, 'curans': checkcurans
+        'qcount': qcount, 'curans': d
         })
